@@ -1,17 +1,24 @@
 package h1;
 
 import java.util.ArrayList;
-import java.util.Comparator;
 
 public class PrioListe {
     private ArrayList<Patient> myList = new ArrayList<>();
 
-
     public void addPatient(Patient p) {
-        myList.add(p);
-        myList.sort(Comparator.comparing(Patient::getPrio));
-    }
+        if (myList.isEmpty() || p.getPrio() > myList.getLast().getPrio()) {
+            myList.add(p);
+            return;
+        }
 
+        for (Patient q : myList) {
+            if (p.getPrio() < q.getPrio()) {
+                myList.add(myList.indexOf(q), p);
+                return;
+            }
+        }
+//        myList.sort(Comparator.comparing(Patient::getPrio));
+    }
 
     public Patient getNextPatient() {
         Patient first = myList.getFirst();
@@ -29,5 +36,4 @@ public class PrioListe {
             System.out.printf("%-10d  %-10s %n", p.getPrio(), p.getName());
         }
     }
-
 }

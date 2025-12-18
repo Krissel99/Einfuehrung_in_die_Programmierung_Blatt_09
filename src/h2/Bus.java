@@ -1,9 +1,7 @@
 package h2;
 
-
 import java.util.ArrayList;
-import java.util.Iterator;
-
+import java.util.Arrays;
 
 public class Bus {
     private ArrayList<Passenger> passengers;
@@ -27,9 +25,8 @@ public class Bus {
         }
         exitBus();
 
-        for (Passenger nowBoarding : boarding) {
-            passengers.add(nowBoarding);
-        }
+        passengers.addAll(Arrays.asList(boarding));
+
     }
 
     public void nextStop() {
@@ -53,8 +50,8 @@ public class Bus {
     }
 
     public void transferPassengers(Bus otherBus, String[] passengerNames) {
-        for (String names : passengerNames) {
-            for (Passenger p : passengers) {
+        for (Passenger p : passengers) {
+            for (String names : passengerNames) {
                 if (p.getName().contains(names)) {
                     otherBus.enterBus(p);
                 }
