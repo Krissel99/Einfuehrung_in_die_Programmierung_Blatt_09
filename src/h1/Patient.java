@@ -1,6 +1,5 @@
 package h1;
 
-
 public class Patient {
     public String name;
     public int prio;
@@ -9,17 +8,4 @@ public class Patient {
         this.name = name;
         this.prio = prio;
     }
-
-//    public String getName() {
-//        return name;
-//    }
-//
-//    public int getPrio() {
-//        return prio;
-//    }
-//
-//    @Override
-//    public String toString() {
-//        return String.format("Patient: %-10s | Priorität: %2d", name, prio);
-//    }
 }

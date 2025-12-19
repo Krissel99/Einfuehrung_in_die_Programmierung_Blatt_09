@@ -10,6 +10,7 @@ public class H1_main {
         Patient   Eve    = new Patient("Eve", 25);
         Patient   David  = new Patient("David", 12);
 
+        myList.addPatient(Werner);
         myList.addPatient(Peter);
         myList.addPatient(Alice);
         myList.addPatient(Bob);
@@ -17,9 +18,8 @@ public class H1_main {
         myList.addPatient(David);
 
         Patient nextPatient = myList.getNextPatient();
-        int     patientPos  = myList.getPosition(Peter);
 
-        myList.printList();
+        int patientPos = myList.getPosition(Eve);
     }
 
 }
