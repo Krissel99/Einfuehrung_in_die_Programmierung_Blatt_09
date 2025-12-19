@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 
 public class Bus {
-    private ArrayList<Passenger> passengers;
+    public ArrayList<Passenger> passengers;
 
     public Bus() {
         this.passengers = new ArrayList<>();
@@ -15,13 +15,12 @@ public class Bus {
     }
 
     private void exitBus() {
-        passengers.removeIf(p -> p.getVisited() == p.getPlanned());
+        passengers.removeIf(p -> p.visited == p.planned);
     }
 
     public void nextStop(Passenger[] boarding) {
         for (Passenger p : passengers) {
-            int newVisited = p.getVisited()+1;
-            p.setVisited(newVisited);
+            p.visited++;
         }
         exitBus();
 
@@ -31,8 +30,7 @@ public class Bus {
 
     public void nextStop() {
         for (Passenger p : passengers) {
-            int newVisited = p.getVisited()+1;
-            p.setVisited(newVisited);
+            p.visited++;
         }
         exitBus();
     }
@@ -40,25 +38,26 @@ public class Bus {
     public ArrayList<Passenger> findPassengersWithoutTickets() {
         ArrayList<Passenger> passengerWithoutTickets = new ArrayList<>();
         for (Passenger p : passengers) {
-            if (!p.getTicket()) {
+            if (!p.ticket) {
                 passengerWithoutTickets.add(p);
             }
         }
-        passengers.removeIf(p -> !p.getTicket());
+        passengers.removeIf(p -> !p.ticket);
         return passengerWithoutTickets;
-
     }
 
     public void transferPassengers(Bus otherBus, String[] passengerNames) {
+        ArrayList<Passenger> passengersToTransfer = new ArrayList<>();
         for (Passenger p : passengers) {
             for (String names : passengerNames) {
-                if (p.getName().contains(names)) {
-                    otherBus.enterBus(p);
+                if (p.name.equals(names)) {
+                    passengersToTransfer.add(p);
                 }
             }
         }
-        for (Passenger b : otherBus.passengers) {
-            passengers.remove(b);
+        for (Passenger p : passengersToTransfer) {
+            passengers.remove(p);
+            otherBus.enterBus(p);
         }
     }
 }
